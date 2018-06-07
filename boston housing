@@ -7,49 +7,121 @@ df=pd.read_csv("C:/Users/ADMIN/Desktop/boston.csv")
 df.head()
 
 df.describe()
-
+import seaborn as sns
+clr=['blue']
 
 df['CRIM'].hist(bins=50)
+sns.distplot(df['CRIM'])
+plt.axvline(df['CRIM'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['CRIM'].median(), linestyle='dashed', 
+                linewidth=2)
+
 
 df.boxplot(column='CRIM')
 
 df['ZN'].hist(bins=50)
+sns.distplot(df['ZN'])
+plt.axvline(df['ZN'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['ZN'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='ZN')
 
 df['INDUS'].hist(bins=50)
+sns.distplot(df['INDUS'])
+plt.axvline(df['INDUS'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['INDUS'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='INDUS')
 
 df['CHAS'].hist(bins=50)
+sns.distplot(df['CHAS'])
+plt.axvline(df['CHAS'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['CHAS'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='CHAS')
 
 df['NOX'].hist(bins=50)
+sns.distplot(df['NOX'])
+plt.axvline(df['NOX'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['NOX'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='NOX')
 
 df['RM'].hist(bins=50)
+sns.distplot(df['RM'])
+plt.axvline(df['RM'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['RM'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='RM')
 
 df['AGE'].hist(bins=50)
+sns.distplot(df['AGE'])
+plt.axvline(df['AGE'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['AGE'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='AGE')
 
 df['DIS'].hist(bins=50)
+sns.distplot(df['DIS'])
+plt.axvline(df['DIS'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['DIS'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='DIS')
 
 df['RAD'].hist(bins=50)
+sns.distplot(df['RAD'])
+plt.axvline(df['RAD'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['RAD'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='RAD')
 
 df['TAX'].hist(bins=50)
+sns.distplot(df['TAX'])
+plt.axvline(df['TAX'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['TAX'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='TAX')
 
 df['PT'].hist(bins=50)
+sns.distplot(df['PT'])
+plt.axvline(df['PT'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['PT'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='PT')
 
 df['B'].hist(bins=50)
+sns.distplot(df['B'])
+plt.axvline(df['B'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['B'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='B')
 
 df['LSTAT'].hist(bins=50)
+sns.distplot(df['LSTAT'])
+plt.axvline(df['LSTAT'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['LSTAT'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='LSTAT')
 
 df['MV'].hist(bins=50)
+sns.distplot(df['MV'])
+plt.axvline(df['MV'].mean(),
+            linestyle='solid', linewidth=2)
+plt.axvline(df['MV'].median(), linestyle='dashed', 
+                linewidth=2)
 df.boxplot(column='MV')
 
 plt.scatter(df.CRIM, df.MV)
