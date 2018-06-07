@@ -1,0 +1,115 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df=pd.read_csv("C:/Users/ADMIN/Desktop/boston.csv")
+
+df.head()
+
+df.describe()
+
+
+df['CRIM'].hist(bins=50)
+
+df.boxplot(column='CRIM')
+
+df['ZN'].hist(bins=50)
+df.boxplot(column='ZN')
+
+df['INDUS'].hist(bins=50)
+df.boxplot(column='INDUS')
+
+df['CHAS'].hist(bins=50)
+df.boxplot(column='CHAS')
+
+df['NOX'].hist(bins=50)
+df.boxplot(column='NOX')
+
+df['RM'].hist(bins=50)
+df.boxplot(column='RM')
+
+df['AGE'].hist(bins=50)
+df.boxplot(column='AGE')
+
+df['DIS'].hist(bins=50)
+df.boxplot(column='DIS')
+
+df['RAD'].hist(bins=50)
+df.boxplot(column='RAD')
+
+df['TAX'].hist(bins=50)
+df.boxplot(column='TAX')
+
+df['PT'].hist(bins=50)
+df.boxplot(column='PT')
+
+df['B'].hist(bins=50)
+df.boxplot(column='B')
+
+df['LSTAT'].hist(bins=50)
+df.boxplot(column='LSTAT')
+
+df['MV'].hist(bins=50)
+df.boxplot(column='MV')
+
+plt.scatter(df.CRIM, df.MV)
+plt.xlabel('CRIM')
+Plt.ylabel('MV')
+plt.show()
+
+plt.scatter(df.ZN,df.MV)
+plt.show()
+
+plt.scatter(df.INDUS,df.MV)
+plt.show()
+
+plt.scatter(df.CHAS,df.MV)
+plt.show()
+
+plt.scatter(df.NOX,df.MV)
+plt.show()
+
+plt.scatter(df.RM,df.MV)
+plt.show()
+
+plt.scatter(df.AGE,df.MV)
+plt.show()
+
+plt.scatter(df.TAX,df.MV)
+plt.show()
+
+plt.scatter(df.PT,df.MV)
+plt.show()
+
+plt.scatter(df.B,df.MV)
+plt.show()
+
+plt.scatter(df.LSTAT,df.MV)
+plt.show()
+
+
+X = df.iloc[:, :-1].values
+y = df.iloc[:,13].values
+
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+y_pred = regressor.predict(X_test)
+
+plt.scatter(y_test,y_pred)
+
+mse = from sklearn.metrics.mean_squared_error(Y_test, Y_pred)
+
+from sklearn.metrics import mean_squared_error
+mse=mean_squared_error(y_test, y_pred)
+from math import sqrt
+rms = sqrt(mean_squared_error(y_test, y_pred))
+
+import statsmodels.api as sm
+regressor = sm.OLS(y, X)
+results = regressor.fit()
+results.summary()
