@@ -1,0 +1,90 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+df=pd.read_csv("C:/Users/ADMIN/Desktop/turkiye-student-evaluation_R_Specific.csv")
+df.shape
+df.head
+df.describe
+
+X_questions = df.iloc[:,5:33]
+question_means = X_questions.mean(axis = 0)
+grand_mean = question_means.mean()
+
+std_by_questions = question_means.std()
+X = df.iloc[:,5:33]
+
+
+from sklearn.decomposition import PCA
+pca = PCA(n_components = 2, random_state=1)
+X_pca = pca.fit_transform(X)
+pca.explained_variance_ratio_.cumsum()[1]
+
+from sklearn.cluster import KMeans
+distortions = []
+K_to_try = range(1, 6)
+
+for i in K_to_try:
+    model = KMeans(
+            n_clusters=i,
+            init='k-means++',
+        
+           random_state=1)
+    model.fit(X_pca)
+    distortions.append(model.inertia_)
+plt.plot(K_to_try, distortions, marker='o')
+plt.xlabel('Number of Clusters (k)')
+plt.ylabel('Distortion')
+plt.show()
+
+model = KMeans(
+    n_clusters=3,
+    init='k-means++',
+    
+    random_state=1)
+
+model = model.fit(X_pca)
+
+y = model.predict(X_pca)
+
+plt.scatter(X_pca[y == 0, 0], X_pca[y == 0, 1], s = 100, c = 'yellow', label = 'Cluster 1')
+plt.scatter(X_pca[y == 1, 0], X_pca[y == 1, 1], s = 100, c = 'green', label = 'Cluster 2')
+plt.scatter(X_pca[y == 2, 0], X_pca[y == 2, 1], s = 100, c = 'red', label = 'Cluster 3')
+
+plt.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], s = 300, c = 'blue', label = 'Centroids')
+plt.title('Clusters of students')
+plt.xlabel('PCA1')
+plt.ylabel('PCA2')
+plt.legend()
+plt.show()
+
+import collections
+print(collections.Counter(y))
+
+
+
+import scipy.cluster.hierarchy as hier
+dendrogram = hier.dendrogram(hier.linkage(X_pca, method = 'ward'))
+plt.title('Dendrogram')
+plt.xlabel('questions')
+plt.ylabel('Euclidean distances')
+plt.show()
+
+from sklearn.cluster import AgglomerativeClustering
+
+model = AgglomerativeClustering(n_clusters = 2, 
+                          affinity ='euclidean', 
+                          linkage ='ward')
+y_hc = model.fit_predict(X_pca)
+
+plt.scatter(X_pca[y_hc == 0, 0], X_pca[y_hc == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
+plt.scatter(X_pca[y_hc== 1, 0], X_pca[y_hc == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
+
+plt.title('Clusters of customers')
+plt.xlabel('PCA1')
+plt.ylabel('PCA2')
+plt.legend()
+plt.show()
+
+import collections
+collections.Counter(y_hc)
