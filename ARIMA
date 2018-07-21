@@ -37,6 +37,7 @@ data['1949']
 
 plt.plot(data)
 
+
 from statsmodels.tsa.stattools import adfuller
 def test_stationarity(timeseries):
     rolmean = pd.rolling_mean(timeseries, window=12)
